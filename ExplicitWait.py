@@ -29,10 +29,10 @@ driver.find_element_by_css_selector('button[type = "submit"]').click()  # click 
 
 # ExplicitWait
 wait = WebDriverWait(driver, 30)
-asdf = EC.visibility_of_element_located((By.ID, "stopFilter_stops-0"))
-element = wait.until(asdf)
+element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "[data-test-id='stops-0-label']")))
 element.click()
 time.sleep(3)
+
 
 driver.quit()
 
