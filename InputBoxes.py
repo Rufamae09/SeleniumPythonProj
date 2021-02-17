@@ -52,6 +52,16 @@ drp = Select(element)
 #drp.select_by_value("Radio-0")  # Select Morning
 drp.select_by_visible_text("Evening")
 
+# Count number of options
+print(len(drp.options))
+
+# Capture all the Options
+all_options = drp.options
+
+for option in all_options:
+    print(option.text)
+
+
 driver.find_element_by_id("FSsubmit").click()  # Click Submit button
 
 driver.quit()
