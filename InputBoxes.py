@@ -1,6 +1,8 @@
-
+# Input boxes, radio button, and check box
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
 driver = webdriver.Chrome(executable_path="C:\Drivers\chromedriver_win32\chromedriver.exe")
 driver.get("https://fs2.formsite.com/meherpavan/form2/index.html?1537702596407")
@@ -25,11 +27,30 @@ driver.find_element_by_id("RESULT_TextField-3").send_keys("7709231111")  # Input
 driver.find_element_by_id("RESULT_TextField-4").send_keys("United States")  # Input Country
 driver.find_element_by_id("RESULT_TextField-5").send_keys("Atlanta")  # Input State
 driver.find_element_by_id("RESULT_TextField-6").send_keys("georgew@test.com")  # Input Email
+
+# Working with the radio button
+status = driver.find_element_by_xpath("//*[@id='q26']/table/tbody/tr[1]/td/label").is_selected()  # Returns true/false
+print(status)
+time.sleep(2)
 driver.find_element_by_xpath("//*[@id='q26']/table/tbody/tr[1]/td/label").click()  # Click Male radio button
+time.sleep(2)
+status = driver.find_element_by_css_selector("input[id='RESULT_RadioButton-7_0']").is_selected()  # Returns true/false
+print(status)
+
+# Working with Check Boxes
 driver. find_element_by_xpath("//*[@id='q15']/table/tbody/tr[1]/td/label").click()  # Click Sunday checkbox
+status = driver.find_element_by_css_selector("input[id='RESULT_CheckBox-8_0']").is_selected()  # Returns true/false
+print(status)
 driver.find_element_by_xpath("//*[@id='q15']/table/tbody/tr[2]/td/label").click()   # Click Monday checkbox
-driver.find_element_by_xpath("//*[@id='RESULT_RadioButton-9']").click()  # Click drop down arrow
-driver.find_element_by_xpath("//*[@id='RESULT_RadioButton-9']/option[2]").click()  # Select Morning in the drop down options
+status = driver.find_element_by_css_selector("input[id='RESULT_CheckBox-8_1']").is_selected()  # Returns true/false
+print(status)
+
+# Working with Drop Down
+element = driver.find_element_by_id("RESULT_RadioButton-9")  # Click the dropdown
+drp = Select(element)
+#drp.select_by_index(2)  # Select Afternoon
+#drp.select_by_value("Radio-0")  # Select Morning
+drp.select_by_visible_text("Evening")
 
 driver.find_element_by_id("FSsubmit").click()  # Click Submit button
 
